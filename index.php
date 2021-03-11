@@ -4,7 +4,8 @@ class User
 {
 
   public $username;
-  private $email;
+  protected $email;
+  public $role = 'member';
 
   public function __construct($username, $email)
   {
@@ -28,17 +29,28 @@ class User
       $this->email = $email;
     }
   }
+
+  public function message()
+  {
+    return "$this->email sent a new message";
+  }
 }
 
 class AdminUser extends User
 {
 
   public $level;
+  public $role = 'admin';
 
   public function __construct($username, $email, $level)
   {
     $this->level = $level;
     parent::__construct($username, $email);
+  }
+
+  public function message()
+  {
+    return "$this->email, an admin, sent a new message";
   }
 }
 
@@ -55,6 +67,9 @@ echo $userThree->getEmail() . '<br />';
 $userOne->setEmail('new@katt.hu') . '<br />';
 echo $userOne->getEmail() . '<br />';
 echo $userOne->addFriend() . '<br />';
+echo $userOne->role . '<br />';
+echo $userOne->message() . '<br />';
+echo $userThree->message() . '<br />';
 
 echo $userTwo->addFriend() . '<br />';
 
