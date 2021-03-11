@@ -4,7 +4,7 @@ class User
 {
 
   public $username;
-  public $email;
+  private $email;
 
   public function __construct($username, $email)
   {
@@ -14,18 +14,46 @@ class User
 
   public function addFriend()
   {
-
     return "$this->username added a new friend";
+  }
+
+  public function getEmail()
+  {
+    return $this->email;
+  }
+
+  public function setEmail($email)
+  {
+    if (strpos($email, '@') > -1) {
+      $this->email = $email;
+    }
+  }
+}
+
+class AdminUser extends User
+{
+
+  public $level;
+
+  public function __construct($username, $email, $level)
+  {
+    $this->level = $level;
+    parent::__construct($username, $email);
   }
 }
 
 $userOne = new User('mokkacuki', 'mokkacuki@katt.hu');
 $userTwo = new User('mokkasin', 'mokkasin@katt.hu');
+$userThree = new AdminUser('mokka', 'mokka@katt.hu', 5);
 
 // echo 'this class is ' . get_class($userOne);
 
 echo $userOne->username . '<br />';
-echo $userOne->email . '<br />';
+echo $userThree->username . '<br />';
+echo $userOne->getEmail() . '<br />';
+echo $userThree->getEmail() . '<br />';
+$userOne->setEmail('new@katt.hu') . '<br />';
+echo $userOne->getEmail() . '<br />';
 echo $userOne->addFriend() . '<br />';
 
 echo $userTwo->addFriend() . '<br />';
