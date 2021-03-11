@@ -13,6 +13,16 @@ class User
     $this->email = $email;
   }
 
+  public function __destruct()
+  {
+    echo "the user $this->username was removed <br>";
+  }
+
+  public function __clone()
+  {
+    $this->username = $this->username . '(cloned)<br>';
+  }
+
   public function addFriend()
   {
     return "$this->username added a new friend";
@@ -57,6 +67,9 @@ class AdminUser extends User
 $userOne = new User('mokkacuki', 'mokkacuki@katt.hu');
 $userTwo = new User('mokkasin', 'mokkasin@katt.hu');
 $userThree = new AdminUser('mokka', 'mokka@katt.hu', 5);
+$userFour = clone $userOne;
+
+echo $userFour->username;
 
 // echo 'this class is ' . get_class($userOne);
 
@@ -70,8 +83,9 @@ echo $userOne->addFriend() . '<br />';
 echo $userOne->role . '<br />';
 echo $userOne->message() . '<br />';
 echo $userThree->message() . '<br />';
-
 echo $userTwo->addFriend() . '<br />';
+
+// unset($userOne);
 
 // print_r(get_class_vars('User'));
 // print_r(get_class_methods('User'));
