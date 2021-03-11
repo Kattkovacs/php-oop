@@ -3,8 +3,14 @@
 class User
 {
 
-  public $username = 'mokka';
-  public $email = 'katt@katt.hu';
+  public $username;
+  public $email;
+
+  public function __construct($username, $email)
+  {
+    $this->username = $username;
+    $this->email = $email;
+  }
 
   public function addFriend()
   {
@@ -13,14 +19,16 @@ class User
   }
 }
 
-$userOne = new User();
-$userTwo = new User();
+$userOne = new User('mokkacuki', 'mokkacuki@katt.hu');
+$userTwo = new User('mokkasin', 'mokkasin@katt.hu');
 
 // echo 'this class is ' . get_class($userOne);
 
 echo $userOne->username . '<br />';
 echo $userOne->email . '<br />';
 echo $userOne->addFriend() . '<br />';
+
+echo $userTwo->addFriend() . '<br />';
 
 // print_r(get_class_vars('User'));
 // print_r(get_class_methods('User'));
